@@ -10,7 +10,7 @@ services:
       # context is the file location from where other files are relative to. In this case, the location of docker-compose.yml.
       context: .
       dockerfile: ./docker_compose/backend/Dockerfile
-    image: backend # the name of the docker image we are creating
+    image: karolsz/backend # the name of the docker image we are creating
     depends_on:
       - postgres
     # Volumes will always be mounted. Kubernetes can overwrite the mount point and write to specified volume. Can leave this in for docker-compose compatibility.
@@ -45,7 +45,7 @@ services:
     build:
       context: .
       dockerfile: ./docker_compose/postgres/Dockerfile
-    image: postgres
+    image: karolsz/postgres
     volumes: #/var/lib/postgresql/data is used because postgress needs some directory depth (will break otherwise)
       - postgres_data:/var/lib/postgresql/data
     env_file:
@@ -57,7 +57,7 @@ services:
     build:
       context: .
       dockerfile: ./docker_compose/frontend/Dockerfile
-    image: frontend
+    image: karolsz/frontend
     volumes: # mount the frontend folder to a new client folder in container to allow for hot-reloading
       - ./frontend:/frontend
     env_file:
